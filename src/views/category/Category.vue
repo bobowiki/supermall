@@ -1,6 +1,8 @@
 <template>
   <div class="wrapper">
+    
     <ul class="content">
+      <button @click='btnClick'>按钮</button>
       <li>商场1</li>
       <li>商场2</li>
       <li>商场3</li>
@@ -117,9 +119,21 @@ export default {
     }
   },
   mounted() {
-   new BScroll('.wrapper',{
-
-    })
+   this.scroll = new BScroll(document.querySelector('.wrapper'),{
+     probeType: 3,
+     pullUpLoad: true
+   })
+   this.scroll.on('scroll',(position) => {
+    //  console.log(position);
+   })
+   this.scroll.on('pullingUp', () => {
+     console.log('上拉加载更多');
+   })
+  },
+  methods: {
+    btnClick() {
+      console.log('btnClick');
+    }
   }
 
 }
